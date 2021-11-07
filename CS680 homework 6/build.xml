@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="hw06" basedir="." default="build">
+
+	<property name="output.dir" value="bin" />
+	<property name="test.output.dir" value="test/bin" />
+	<property name="src.dir" value="src" />
+	<property name="test.src.dir" value="test/src" />
+	<property environment="env" />
+	<property name="junit.output.dir" value="junit" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.8" />
+	<property name="source" value="1.8" />
+
+	<path id="classpath">
+		<pathelement location="bin" />
+		<pathelement location="test/bin" />
+
+		<fileset dir="${env.JUNIT}" includes="*jupiter.api_5.7.1*.jar" />
+		<fileset dir="${env.JUNIT}" includes="*jupiter.engine_5.7.1*.jar" />
+		<fileset dir="${env.JUNIT}" includes="*jupiter.jupiter.params_5.7.1*.jar" />
+		<fileset dir="${env.JUNIT}" includes="*apiguardian*.jar" />
+		<fileset dir="${env.JUNIT}" includes="*opentest4j*.jar" />
+		<fileset dir="${env.JUNIT}" includes="*platform.commons_1.7*.jar" />
+		<fileset dir="${env.JUNIT}" includes="*platform.engine_1.7*.jar" />
+		<fileset dir="${env.JUNIT}" includes="*platform.launcher_1.7*.jar" />
+		<fileset dir="${env.JUNIT}" includes="*platform.runner_1.7*.jar" />
+		<fileset dir="${env.JUNIT}" includes="*platform.suite.api_1.7*.jar" />
+
+	</path>
+
+	<target name="clean">
+		<delete dir="${output.dir}" />
+		<delete dir="${test.output.dir}" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="${output.dir}" />
+		<mkdir dir="${test.output.dir}" />
+	</target>
+
+	<target depends="clean" name="cleanall" />
+	<target depends="clean, build-project, DVDPlayerTest, DVDPlayer" name="build" />
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="${output.dir}" includeantruntime="false" source="${source}" target="${target}">
+			<src path="${src.dir}" />
+			<classpath refid="classpath" />
+		</javac>
+		<javac debug="true" debuglevel="${debuglevel}" destdir="test/bin" includeantruntime="false" source="${source}" target="${target}">
+			<src path="${test.src.dir}" />
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+
+	<target name="DVDPlayer">
+		<java classname="edu.umb.cs680.hw06.DVDPlayer" classpath="bin" failonerror="true" fork="yes" />
+	</target>
+
+	<target name="DVDPlayerTest">
+		<junitlauncher printSummary="yes">
+			<classpath refid="classpath" />
+
+			<testclasses outputdir="test">
+				<fileset dir="${test.output.dir}">
+					<include name="edu/umb/cs680/hw06/*Test.class" />
+				</fileset>
+				<listener type="legacy-plain" sendSysOut="true" />
+			</testclasses>
+		</junitlauncher>
+	</target>
+</project>
