@@ -1,0 +1,10 @@
+Testcase: edu.umb.cs680.hw09.apfs.ApfsDirectoryTest
+Test: FileNamesInSubdirectoriesTest() took 5 milli sec(s)
+Test: isDirectoryTest() took 3 milli sec(s)
+Test: checkNamesOfFilesAndDirectories() took 2 milli sec(s)
+Test: verifyApfsDirectoryEqualityCode() took 4 milli sec(s)
+Test: verifyApfsDirectoryEqualityHome() took 1 milli sec(s)
+Test: verifyApfsDirectoryEqualityPics() took 3 milli sec(s)
+Test: verifyApfsDirectoryEqualityApplications() took 1 milli sec(s)
+Test: SubDirectoriesTest() took 2 milli sec(s)
+Tests run: 8, Failures: 0, Skipped: 0, Aborted: 0, Time elapsed: 46 milli sec(s)
